@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert JPG images to PNG format online for free. Fast, secure, and easy-to-use JPG to PNG converter with batch processing and ZIP download.">
+    <title>JPG to PNG Converter Online - Free Image Format Conversion Tool</title>
+    <style>
+        :root {
+            --primary-color: #8a2be2;
+            --primary-dark: #6a1cb8;
+            --primary-light: #9d4edd;
+            --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --text-color: #f8f9fa;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 8px 32px rgba(138, 43, 226, 0.2);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--gradient-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary-light), #e0aaff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            color: var(--primary-light);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-light);
+            border-radius: var(--border-radius);
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(138, 43, 226, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 48px;
+            color: var(--primary-light);
+            margin-bottom: 15px;
+        }
+
+        .upload-area p {
+            margin-bottom: 10px;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .preview-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .preview-box {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .preview-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+        }
+
+        .preview-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(138, 43, 226, 0.3);
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .preview-item .file-name {
+            padding: 6px;
+            font-size: 0.75rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .empty-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .empty-preview i {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            display: none;
+        }
+
+        .success-message {
+            color: #51cf66;
+            background: rgba(81, 207, 102, 0.1);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            display: none;
+        }
+
+        .ad-container {
+            margin: 25px 0;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* File Saving Options Styles */
+        .save-options {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .save-options h3 {
+            text-align: left;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+        }
+
+        .save-option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .save-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .save-option label {
+            min-width: 180px;
+            font-weight: 500;
+        }
+
+        .save-option input, .save-option select {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .save-option input:focus, .save-option select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+        }
+
+        .filename-preview {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .download-btn.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border: none;
+        }
+
+        .download-btn.primary:hover {
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary-light);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary-light);
+        }
+
+        .file-rename-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .file-rename-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .file-rename-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-rename-item img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .file-rename-input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .preview-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .preview-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .save-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .save-option label {
+                min-width: auto;
+            }
+
+            .download-options {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .upload-area {
+                padding: 25px 15px;
+            }
+            
+            .preview-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JPG 2 PNG CONVERTER</h1>
+            <p>Convert your JPG images to PNG format instantly for free</p>
+        </header>
+
+        <!-- Ad Space - Top Banner -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense placeholder -->
+                <div id="ad-top-banner">
+                    <!-- AdSense code will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="card">
+                <h2>Upload JPG Images</h2>
+                <p>Select one or multiple JPG images to convert to PNG format</p>
+                
+                <div class="upload-area" id="upload-area">
+                    <i>📁</i>
+                    <p>Drag & drop your JPG files here or click to browse</p>
+                    <p class="small">Supports multiple files (Max: 10 files, 5MB each)</p>
+                    <input type="file" id="file-input" accept=".jpg,.jpeg" multiple>
+                </div>
+
+                <div class="error-message" id="error-message"></div>
+                <div class="success-message" id="success-message"></div>
+
+                <div class="preview-section">
+                    <div class="preview-box">
+                        <span class="preview-label">Before (JPG)</span>
+                        <div class="preview-container" id="jpg-preview-container">
+                            <div class="empty-preview">
+                                <i>🖼️</i>
+                                <p>No JPG images uploaded</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-box">
+                        <span class="preview-label">After (PNG)</span>
+                        <div class="preview-container" id="png-preview-container">
+                            <div class="empty-preview">
+                                <i>📄</i>
+                                <p>No PNG images converted</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-options">
+                    <h3>File Saving Options</h3>
+                    <div class="save-option-group">
+                        <div class="save-option">
+                            <label for="filename-format">Filename Format:</label>
+                            <select id="filename-format">
+                                <option value="original">Keep original name</option>
+                                <option value="converted-image" selected>converted-image (numbered)</option>
+                                <option value="custom">Custom prefix</option>
+                            </select>
+                        </div>
+                        <div class="save-option" id="custom-prefix-container" style="display: none;">
+                            <label for="custom-prefix">Custom Prefix:</label>
+                            <input type="text" id="custom-prefix" placeholder="Enter custom prefix">
+                        </div>
+                        <div class="save-option">
+                            <label for="file-extension">File Extension:</label>
+                            <select id="file-extension">
+                                <option value="png" selected>.png</option>
+                                <option value="PNG">.PNG (uppercase)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filename-preview" id="filename-preview">
+                        Example: converted-image-1.png
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn" id="convert-btn">
+                        <i>🔄</i> Convert to PNG
+                    </button>
+                    <button class="btn btn-secondary" id="rename-btn" disabled>
+                        <i>✏️</i> Rename Files
+                    </button>
+                    <button class="btn btn-secondary" id="download-all-btn" disabled>
+                        <i>📥</i> Download All
+                    </button>
+                    <button class="btn btn-secondary" id="clear-all-btn">
+                        <i>🗑️</i> Clear All
+                    </button>
+                </div>
+
+                <div class="download-options" id="download-options" style="display: none;">
+                    <button class="download-btn primary" id="download-individual">
+                        <i>📄</i> Download Individual Files
+                    </button>
+                    <button class="download-btn" id="download-zip">
+                        <i>📦</i> Download as ZIP
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Converting your images... Please wait</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- File Rename Modal -->
+        <div class="modal" id="rename-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Rename Files Before Download</h3>
+                    <button class="close-modal" id="close-rename-modal">&times;</button>
+                </div>
+                <div class="file-rename-list" id="file-rename-list">
+                    <!-- File rename items will be added here -->
+                </div>
+                <div class="actions">
+                    <button class="btn" id="confirm-rename">
+                        <i>✅</i> Confirm Names & Download
+                    </button>
+                    <button class="btn btn-secondary" id="cancel-rename">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Space - Footer -->
+        <div class="ad-container">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <!-- Google AdSense placeholder -->
+                <div id="ad-footer">
+                    <!-- AdSense code will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span id="current-year"></span> JPG to PNG Converter. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            const fileInput = document.getElementById('file-input');
+            const uploadArea = document.getElementById('upload-area');
+            const jpgPreviewContainer = document.getElementById('jpg-preview-container');
+            const pngPreviewContainer = document.getElementById('png-preview-container');
+            const convertBtn = document.getElementById('convert-btn');
+            const renameBtn = document.getElementById('rename-btn');
+            const downloadAllBtn = document.getElementById('download-all-btn');
+            const clearAllBtn = document.getElementById('clear-all-btn');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            const loading = document.getElementById('loading');
+            const downloadOptions = document.getElementById('download-options');
+            const downloadIndividualBtn = document.getElementById('download-individual');
+            const downloadZipBtn = document.getElementById('download-zip');
+            
+            // File saving options elements
+            const filenameFormat = document.getElementById('filename-format');
+            const customPrefixContainer = document.getElementById('custom-prefix-container');
+            const customPrefix = document.getElementById('custom-prefix');
+            const fileExtension = document.getElementById('file-extension');
+            const filenamePreview = document.getElementById('filename-preview');
+            
+            // Modal elements
+            const renameModal = document.getElementById('rename-modal');
+            const fileRenameList = document.getElementById('file-rename-list');
+            const closeRenameModal = document.getElementById('close-rename-modal');
+            const confirmRename = document.getElementById('confirm-rename');
+            const cancelRename = document.getElementById('cancel-rename');
+            
+            let uploadedFiles = [];
+            let convertedFiles = [];
+            let fileCounter = 1;
+            
+            // Upload area click event
+            uploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            // Drag and drop functionality
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--primary-color)';
+                uploadArea.style.background = 'rgba(138, 43, 226, 0.1)';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = 'var(--primary-light)';
+                uploadArea.style.background = '';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--primary-light)';
+                uploadArea.style.background = '';
+                
+                if (e.dataTransfer.files.length) {
+                    handleFiles(e.dataTransfer.files);
+                }
+            });
+            
+            // File input change event
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length) {
+                    handleFiles(fileInput.files);
+                }
+            });
+            
+            // Filename format change event
+            filenameFormat.addEventListener('change', updateFilenamePreview);
+            customPrefix.addEventListener('input', updateFilenamePreview);
+            fileExtension.addEventListener('change', updateFilenamePreview);
+            
+            // Update filename preview based on selected options
+            function updateFilenamePreview() {
+                const format = filenameFormat.value;
+                const extension = fileExtension.value;
+                
+                if (format === 'original') {
+                    filenamePreview.textContent = 'Example: my-image.png';
+                } else if (format === 'converted-image') {
+                    filenamePreview.textContent = `Example: converted-image-1.${extension}`;
+                } else if (format === 'custom') {
+                    const prefix = customPrefix.value || 'my-image';
+                    filenamePreview.textContent = `Example: ${prefix}-1.${extension}`;
+                }
+                
+                // Show/hide custom prefix input
+                if (format === 'custom') {
+                    customPrefixContainer.style.display = 'flex';
+                } else {
+                    customPrefixContainer.style.display = 'none';
+                }
+            }
+            
+            // Initialize filename preview
+            updateFilenamePreview();
+            
+            // Handle selected files
+            function handleFiles(files) {
+                errorMessage.style.display = 'none';
+                
+                // Check if adding these files would exceed the limit
+                if (uploadedFiles.length + files.length > 10) {
+                    showError('Maximum 10 files allowed. Please remove some files before adding more.');
+                    return;
+                }
+                
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    
+                    // Validate file type
+                    if (!file.type.match('image/jpeg') && !file.name.toLowerCase().endsWith('.jpg') && !file.name.toLowerCase().endsWith('.jpeg')) {
+                        showError('Please upload only JPG/JPEG images.');
+                        continue;
+                    }
+                    
+                    // Validate file size (5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        showError(`File "${file.name}" is too large. Maximum size is 5MB.`);
+                        continue;
+                    }
+                    
+                    uploadedFiles.push(file);
+                    createJpgPreview(file);
+                }
+                
+                updateButtonsState();
+            }
+            
+            // Create preview for uploaded JPG file
+            function createJpgPreview(file) {
+                // Clear empty state if it exists
+                if (jpgPreviewContainer.querySelector('.empty-preview')) {
+                    jpgPreviewContainer.innerHTML = '';
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = `Preview of ${file.name}`;
+                    
+                    const fileName = document.createElement('div');
+                    fileName.className = 'file-name';
+                    fileName.textContent = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name;
+                    
+                    previewItem.appendChild(img);
+                    previewItem.appendChild(fileName);
+                    
+                    jpgPreviewContainer.appendChild(previewItem);
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            // Create preview for converted PNG file
+            function createPngPreview(fileName, blobUrl) {
+                // Clear empty state if it exists
+                if (pngPreviewContainer.querySelector('.empty-preview')) {
+                    pngPreviewContainer.innerHTML = '';
+                }
+                
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                
+                const img = document.createElement('img');
+                img.src = blobUrl;
+                img.alt = `Preview of ${fileName}`;
+                
+                const fileNameDiv = document.createElement('div');
+                fileNameDiv.className = 'file-name';
+                fileNameDiv.textContent = fileName.length > 20 ? fileName.substring(0, 17) + '...' : fileName;
+                
+                previewItem.appendChild(img);
+                previewItem.appendChild(fileNameDiv);
+                
+                pngPreviewContainer.appendChild(previewItem);
+            }
+            
+            // Convert images to PNG
+            convertBtn.addEventListener('click', async () => {
+                if (uploadedFiles.length === 0) {
+                    showError('Please upload at least one JPG image to convert.');
+                    return;
+                }
+                
+                loading.style.display = 'block';
+                convertedFiles = [];
+                fileCounter = 1;
+                
+                try {
+                    for (let i = 0; i < uploadedFiles.length; i++) {
+                        const file = uploadedFiles[i];
+                        const pngBlob = await convertToPNG(file);
+                        
+                        if (pngBlob) {
+                            const pngFileName = generateFilename(file.name, fileCounter);
+                            const pngUrl = URL.createObjectURL(pngBlob);
+                            
+                            convertedFiles.push({
+                                originalName: file.name,
+                                name: pngFileName,
+                                blob: pngBlob,
+                                url: pngUrl
+                            });
+                            
+                            createPngPreview(pngFileName, pngUrl);
+                            fileCounter++;
+                        }
+                    }
+                    
+                    if (convertedFiles.length > 0) {
+                        downloadAllBtn.disabled = false;
+                        renameBtn.disabled = false;
+                        downloadOptions.style.display = 'flex';
+                        showSuccess(`${convertedFiles.length} image(s) converted successfully!`);
+                    }
+                } catch (error) {
+                    showError('Conversion failed. Please try again.');
+                    console.error('Conversion error:', error);
+                } finally {
+                    loading.style.display = 'none';
+                }
+            });
+            
+            // Generate filename based on user preferences
+            function generateFilename(originalName, counter) {
+                const format = filenameFormat.value;
+                const extension = fileExtension.value;
+                
+                if (format === 'original') {
+                    return originalName.replace(/\.jpe?g$/i, `.${extension}`);
+                } else if (format === 'converted-image') {
+                    return `converted-image-${counter}.${extension}`;
+                } else if (format === 'custom') {
+                    const prefix = customPrefix.value || 'image';
+                    return `${prefix}-${counter}.${extension}`;
+                }
+                
+                // Default fallback
+                return `converted-image-${counter}.${extension}`;
+            }
+            
+            // Convert JPG to PNG using Canvas
+            function convertToPNG(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0);
+                            
+                            canvas.toBlob((blob) => {
+                                resolve(blob);
+                            }, 'image/png');
+                        };
+                        
+                        img.onerror = reject;
+                        img.src = e.target.result;
+                    };
+                    
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            }
+            
+            // Download all converted images
+            downloadAllBtn.addEventListener('click', () => {
+                if (convertedFiles.length === 0) {
+                    showError('No converted images available. Please convert images first.');
+                    return;
+                }
+                
+                // For single file, download directly
+                if (convertedFiles.length === 1) {
+                    downloadFile(convertedFiles[0].blob, convertedFiles[0].name);
+                } else {
+                    // For multiple files, show download options
+                    downloadOptions.style.display = 'flex';
+                }
+            });
+            
+            // Download individual files
+            downloadIndividualBtn.addEventListener('click', () => {
+                if (convertedFiles.length === 0) return;
+                
+                // Show rename modal for multiple files
+                if (convertedFiles.length > 1) {
+                    openRenameModal();
+                } else {
+                    // For single file, download directly
+                    downloadFile(convertedFiles[0].blob, convertedFiles[0].name);
+                }
+            });
+            
+            // Download as ZIP
+            downloadZipBtn.addEventListener('click', () => {
+                showError('ZIP download functionality would be implemented with a library like JSZip');
+                // In a full implementation, you would use a library like JSZip
+                // to create a ZIP file containing all converted images
+            });
+            
+            // Open rename modal
+            function openRenameModal() {
+                fileRenameList.innerHTML = '';
+                
+                convertedFiles.forEach((file, index) => {
+                    const renameItem = document.createElement('div');
+                    renameItem.className = 'file-rename-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = file.url;
+                    img.alt = `Preview of ${file.name}`;
+                    
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'file-rename-input';
+                    input.value = file.name;
+                    input.dataset.index = index;
+                    
+                    renameItem.appendChild(img);
+                    renameItem.appendChild(input);
+                    fileRenameList.appendChild(renameItem);
+                });
+                
+                renameModal.style.display = 'flex';
+            }
+            
+            // Close rename modal
+            closeRenameModal.addEventListener('click', () => {
+                renameModal.style.display = 'none';
+            });
+            
+            cancelRename.addEventListener('click', () => {
+                renameModal.style.display = 'none';
+            });
+            
+            // Confirm rename and download
+            confirmRename.addEventListener('click', () => {
+                const inputs = fileRenameList.querySelectorAll('.file-rename-input');
+                
+                inputs.forEach(input => {
+                    const index = parseInt(input.dataset.index);
+                    const newName = input.value.trim();
+                    
+                    if (newName && newName !== convertedFiles[index].name) {
+                        convertedFiles[index].name = newName;
+                    }
+                });
+                
+                renameModal.style.display = 'none';
+                
+                // Download all files with updated names
+                convertedFiles.forEach(file => {
+                    downloadFile(file.blob, file.name);
+                });
+            });
+            
+            // Download a single file
+            function downloadFile(blob, filename) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+            
+            // Clear all files
+            clearAllBtn.addEventListener('click', () => {
+                uploadedFiles = [];
+                convertedFiles = [];
+                fileCounter = 1;
+                
+                // Clear JPG preview
+                jpgPreviewContainer.innerHTML = '';
+                jpgPreviewContainer.innerHTML = `
+                    <div class="empty-preview">
+                        <i>🖼️</i>
+                        <p>No JPG images uploaded</p>
+                    </div>
+                `;
+                
+                // Clear PNG preview
+                pngPreviewContainer.innerHTML = '';
+                pngPreviewContainer.innerHTML = `
+                    <div class="empty-preview">
+                        <i>📄</i>
+                        <p>No PNG images converted</p>
+                    </div>
+                `;
+                
+                downloadAllBtn.disabled = true;
+                renameBtn.disabled = true;
+                downloadOptions.style.display = 'none';
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+                fileInput.value = '';
+            });
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+            
+            // Show success message
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+            }
+            
+            // Update buttons state based on files
+            function updateButtonsState() {
+                convertBtn.disabled = uploadedFiles.length === 0;
+            }
+        });
+    </script>
+</body>
+</html>
